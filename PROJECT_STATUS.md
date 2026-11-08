@@ -19,7 +19,7 @@
 ## In progress
 - **P0 Setup & skeletons** — started 2026-11-08
   - [x] Step 1: repository skeleton, planning docs, tracking files (GitHub: hadiezzy19/cedar-pos)
-  - [ ] Step 2: Maven project (pos-core, pos-server, pos-desktop)
+  - [~] Step 2: Maven project (pos-core, pos-server, pos-desktop) — written, **waiting for owner's NetBeans build result**
   - [ ] Step 3: database creation script
   - [ ] Step 4: Flyway migrations V1–V3
   - [ ] Step 5: server starts, /api/v1/health
@@ -30,4 +30,4 @@
 - Nothing
 
 ## Next task
-P0 Step 2: Maven multi-module project.
+Owner builds `java/` in NetBeans; then P0 Step 3 (database creation script).

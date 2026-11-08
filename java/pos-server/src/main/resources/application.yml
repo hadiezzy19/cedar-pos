@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: cedar-pos-server
+
+server:
+  port: 8080
