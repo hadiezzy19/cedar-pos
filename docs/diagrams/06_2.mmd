@@ -1,0 +1,11 @@
+flowchart TD
+  A["Receive op"] --> B{"opId in<br/>processed_operations?"}
+  B -- yes --> C["Return stored result<br/>(DUPLICATE)"]
+  B -- no --> D{"Payload valid?<br/>(schema, device, branch,<br/>known variants)"}
+  D -- no --> E["Store REJECTED + sync_issue ERROR<br/>device keeps op as FAILED"]
+  D -- yes --> F{"Dependencies present?<br/>(e.g. cash session exists)"}
+  F -- no --> G["Return RETRY_LATER<br/>(device re-sends after deps)"]
+  F -- yes --> H["Apply: insert rows,<br/>post stock movements,<br/>ledger, change_log"]
+  H --> I{"Business anomalies?<br/>(over-return, total mismatch,<br/>negative stock, clock skew)"}
+  I -- yes --> J["Commit + sync_issue<br/>result FLAGGED"]
+  I -- no --> K["Commit<br/>result APPLIED"]

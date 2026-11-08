@@ -1,0 +1,87 @@
+erDiagram
+  businesses ||--o{ branches : has
+  businesses ||--o{ users : employs
+  businesses ||--o{ roles : defines
+  businesses ||--o{ exchange_rates : sets
+  businesses ||--o{ business_settings : configures
+  branches ||--o{ devices : "registers"
+  branches ||--o{ cash_registers : has
+  devices |o--o| cash_registers : controls
+  roles ||--o{ users : "assigned to"
+  roles ||--o{ role_permissions : grants
+  permissions ||--o{ role_permissions : "granted by"
+  users ||--o{ user_branches : "works in"
+  branches ||--o{ user_branches : staffs
+  users ||--o{ refresh_tokens : holds
+  devices ||--o{ refresh_tokens : "issued to"
+  users ||--o{ push_tokens : receives
+  currencies ||--o{ exchange_rates : "from/to"
+
+  businesses {
+    uuid id PK
+    string name
+    char base_currency FK
+    char secondary_currency FK
+    bool vat_enabled
+    bool prices_include_vat
+    int lbp_rounding_step
+    string negative_stock_policy
+  }
+  branches {
+    uuid id PK
+    uuid business_id FK
+    string code UK
+    string name
+  }
+  devices {
+    uuid id PK
+    uuid branch_id FK
+    string device_type
+    string code UK
+    string secret_hash
+    bool is_active
+  }
+  cash_registers {
+    uuid id PK
+    uuid branch_id FK
+    uuid device_id FK
+    string name
+  }
+  users {
+    uuid id PK
+    uuid business_id FK
+    uuid role_id FK
+    string username UK
+    string password_hash
+    string pin_hash
+  }
+  roles {
+    uuid id PK
+    uuid business_id FK
+    string name
+    decimal max_discount_percent
+  }
+  permissions {
+    string code PK
+    string module
+  }
+  role_permissions {
+    uuid role_id PK
+    string permission_code PK
+  }
+  user_branches {
+    uuid user_id PK
+    uuid branch_id PK
+  }
+  exchange_rates {
+    uuid id PK
+    uuid business_id FK
+    char from_currency FK
+    char to_currency FK
+    decimal rate
+    datetime effective_from
+  }
+  currencies {
+    char code PK
+    int decimals
+  }

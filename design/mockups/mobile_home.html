@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Mobile home mockup</title>
+<style>
+:root{--paper:#F6F4EF;--surface:#FFFFFF;--ink:#16191D;--ink2:#4C545E;--ink3:#7D858F;--rule:#E3DED4;--rule2:#CFC8BB;--accent:#0E6B66;--accent-soft:#E3F0EE;--pos:#2F7A4B;--warn:#A5630F;--warn-soft:#FBF0DC;--danger:#B23A2A;--danger-soft:#F9E5E1;--lbp:#5B4A7A;--lbp-soft:#ECE8F3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:390px;height:844px;background:var(--paper);font-family:Inter,sans-serif;color:var(--ink);font-size:14px;font-feature-settings:"tnum" 1;display:flex;flex-direction:column;overflow:hidden}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 24px;font-size:14px;font-weight:600}
+.hd{padding:6px 20px 0}
+.greet{font-size:13px;color:var(--ink2)}
+.h1{font-family:Lora,serif;font-size:27px;font-weight:600;margin-top:2px;letter-spacing:-.2px}
+.br{display:flex;gap:8px;margin-top:14px}
+.chip{padding:7px 13px;border-radius:999px;border:1px solid var(--rule);background:var(--surface);font-size:12.5px;color:var(--ink2)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.content{flex:1;overflow:hidden;padding:14px 20px 0;display:flex;flex-direction:column;gap:12px}
+.hero{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:16px 16px 12px}
+.lab{font-size:11px;letter-spacing:1.4px;font-weight:700;color:var(--ink2)}
+.amt{font-size:36px;font-weight:600;letter-spacing:-1px;margin-top:6px}
+.sub{display:flex;align-items:center;gap:8px;margin-top:3px;color:var(--lbp);font-weight:600;font-size:14px}
+.tag{font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:4px;background:var(--lbp-soft);color:var(--lbp)}
+.delta{margin-left:auto;color:var(--pos);font-size:12.5px;font-weight:600;background:#E6F2EA;padding:3px 8px;border-radius:999px}
+svg.ch{margin-top:10px;display:block}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3);margin-top:4px}
+.kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.k{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:11px 12px}
+.k .v{font-size:19px;font-weight:600;margin-top:5px}
+.k .lab{font-size:10px}
+.alerts{background:var(--surface);border:1px solid var(--rule);border-radius:12px}
+.al{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--rule)}
+.al:last-child{border-bottom:0}
+.ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:13px}
+.al .t{font-weight:600;font-size:13.5px}
+.al .d{font-size:12px;color:var(--ink3);margin-top:1px}
+.al .go{margin-left:auto;color:var(--ink3);font-size:18px}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin-top:2px}
+.sec b{font-family:Lora,serif;font-size:16px;font-weight:600}
+.sec span{font-size:12px;color:var(--accent);font-weight:600}
+.nav{height:82px;border-top:1px solid var(--rule);background:var(--surface);display:flex;justify-content:space-around;align-items:flex-start;padding-top:10px}
+.nv{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--ink3);position:relative;width:64px}
+.nv.on{color:var(--accent);font-weight:600}
+.nv .bd{position:absolute;top:-4px;right:12px;background:var(--danger);color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:1px 5px}
+</style></head><body>
+<div class="status"><span>14:52</span><span>●●● ᯤ 87%</span></div>
+<div class="hd">
+  <div class="greet">Sunday, 8 November · <span style="color:var(--pos);font-weight:600">● Live</span></div>
+  <div class="h1">Good afternoon, Hadi</div>
+  <div class="br"><div class="chip on">All branches</div><div class="chip">B01 Hamra</div><div class="chip">B02 Jounieh</div></div>
+</div>
+<div class="content">
+  <div class="hero">
+    <div class="lab">SALES TODAY</div>
+    <div class="amt">$4,812.40</div>
+    <div class="sub"><span class="tag">LBP</span>430.71M equivalent <span class="delta">▲ 12% vs Sun</span></div>
+    <svg class="ch" width="326" height="74" viewBox="0 0 326 74">
+      <line x1="0" y1="73" x2="326" y2="73" stroke="#E3DED4"/>
+      <g fill="#0E6B66">
+        <rect x="4" y="60" width="16" height="13" rx="3"/><rect x="31" y="50" width="16" height="23" rx="3"/><rect x="58" y="38" width="16" height="35" rx="3"/><rect x="85" y="30" width="16" height="43" rx="3"/><rect x="112" y="20" width="16" height="53" rx="3"/><rect x="139" y="26" width="16" height="47" rx="3"/><rect x="166" y="34" width="16" height="39" rx="3"/><rect x="193" y="14" width="16" height="59" rx="3"/><rect x="220" y="8" width="16" height="65" rx="3"/>
+      </g>
+      <g fill="#D7E7E4"><rect x="247" y="22" width="16" height="51" rx="3"/><rect x="274" y="30" width="16" height="43" rx="3"/><rect x="301" y="44" width="16" height="29" rx="3"/></g>
+    </svg>
+    <div class="axis"><span>8am</span><span>11am</span><span>2pm</span><span>5pm</span><span>8pm</span></div>
+  </div>
+  <div class="kpis">
+    <div class="k"><div class="lab">SALES</div><div class="v">312</div></div>
+    <div class="k"><div class="lab">AVG BASKET</div><div class="v">$15.42</div></div>
+    <div class="k"><div class="lab">GROSS PROFIT</div><div class="v">$1,388</div></div>
+  </div>
+  <div class="sec"><b>Needs your attention</b><span>See all</span></div>
+  <div class="alerts">
+    <div class="al"><div class="ic" style="background:var(--accent-soft);color:var(--accent)">2</div><div><div class="t">Approval requests</div><div class="d">Discount 25% · T02 Hamra · 1:42 left</div></div><div class="go">›</div></div>
+    <div class="al"><div class="ic" style="background:var(--warn-soft);color:var(--warn)">9</div><div><div class="t">Items below reorder point</div><div class="d">3 suppliers · suggested order ready</div></div><div class="go">›</div></div>
+    <div class="al"><div class="ic" style="background:var(--danger-soft);color:var(--danger)">!</div><div><div class="t">Cash difference at close</div><div class="d">Z-0041 · T01 · −$6.00 · −45,000 LBP</div></div><div class="go">›</div></div>
+  </div>
+</div>
+<div class="nav">
+  <div class="nv on"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</div>
+  <div class="nv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Live</div>
+  <div class="nv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3M7 12h10"/></svg>Scan</div>
+  <div class="nv"><span class="bd">2</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Approvals</div>
+  <div class="nv"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</div>
+</div>
+</body></html>

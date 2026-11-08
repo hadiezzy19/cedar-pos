@@ -1,0 +1,22 @@
+flowchart LR
+  subgraph MGR["Owner / Manager"]
+    direction TB
+    H["Home"] --> RATE["Set rate"] & DSUM["Daily summary"] & ALR["Alerts"] & BRD["Branch detail"]
+    L["Live"] --> SD["Sale detail"]
+    SC["Scan"] --> PD["Product detail"]
+    AP["Approvals"] --> AD["Approve / reject"]
+    MO["More"] --> REP["Reports · Branches · Employees<br/>Reorder · Counts · Sync · Settings"]
+  end
+  subgraph STK["Stock keeper"]
+    direction TB
+    SC2["Scan"] --> PD2["Product detail"] --> ADJ["Adjustment"]
+    CN["Counts"] --> CD["Count session"] --> CSUB["Submit"]
+    RV["Receive"] --> RVS["Receive session"] --> RVC["Confirm"]
+    ST["Stock"] --> LOW["Low stock"] & RO["Reorder"]
+  end
+  subgraph ACC["Accountant"]
+    direction TB
+    H3["Home"] --> DS3["Daily summary"]
+    R3["Reports"]
+    C3["Cash sessions"]
+  end

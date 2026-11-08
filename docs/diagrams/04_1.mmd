@@ -1,0 +1,26 @@
+flowchart LR
+  ORG["Organization<br/>businesses · branches · devices<br/>cash_registers · settings"]
+  CUR["Currency<br/>currencies · exchange_rates"]
+  IAM["Identity<br/>users · roles · permissions"]
+  CAT["Catalog<br/>products · variants · packagings<br/>barcodes · prices · taxes"]
+  INV["Inventory<br/>stock_levels · stock_movements<br/>adjustments · counts · transfers"]
+  PUR["Purchasing<br/>suppliers · purchases · payments"]
+  SAL["Sales<br/>sales · lines · payments<br/>returns · refunds"]
+  CUS["Customers<br/>customers · ledger · payments"]
+  CSH["Cash<br/>cash_sessions · cash_movements"]
+  EXP["Expenses"]
+  APR["Approvals & Notifications"]
+  SYN["Sync & Audit<br/>change_log · processed_operations<br/>sync_issues · audit_logs"]
+  ORG --> IAM
+  ORG --> CAT
+  CUR --> SAL
+  CAT --> INV
+  CAT --> SAL
+  PUR --> INV
+  SAL --> INV
+  SAL --> CSH
+  SAL --> CUS
+  EXP --> CSH
+  APR --> SAL
+  SYN -.-> SAL
+  SYN -.-> INV

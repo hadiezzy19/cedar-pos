@@ -1,0 +1,10 @@
+sequenceDiagram
+  participant T as Terminal
+  participant API as Server
+  participant M as Manager phone
+  T->>API: POST /approvals (DISCOUNT_OVER_LIMIT, 25%)
+  API->>M: push notification
+  T->>API: poll GET /approvals/{id} every 2 s (max 5 min)
+  M->>API: POST /approvals/{id}/approve
+  API-->>T: status APPROVED (by, at)
+  T->>T: apply discount, keep approval id on the sale

@@ -1,0 +1,6 @@
+flowchart LR
+  G["General<br/>name · category · brand<br/>tax · base unit · track stock"] --> V["Variants<br/>attributes → generate matrix<br/>SKU per variant"]
+  V --> U["Units & packagings<br/>Box of 24 · Pack of 6"]
+  U --> B["Barcodes<br/>per variant / packaging<br/>generate internal"]
+  B --> P["Prices<br/>USD or LBP · branch override<br/>history"]
+  P --> S["Stock & reorder<br/>per branch · reorder point"]

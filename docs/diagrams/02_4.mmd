@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  participant API as SyncController
+  participant P as processed_operations
+  participant SS as SalesService
+  participant INV as InventoryService
+  participant CL as change_log
+  API->>P: operation_id already processed?
+  alt yes
+    P-->>API: stored result → return DUPLICATE
+  else no
+    API->>SS: BEGIN TRANSACTION
+    SS->>SS: validate (device, branch, session, totals via pos-core)
+    SS->>INV: post SALE movements, set unit_cost from avg cost
+    SS->>CL: append change entries (stock_levels, sale)
+    SS->>P: insert operation_id + result
+    SS-->>API: COMMIT → APPLIED
+  end

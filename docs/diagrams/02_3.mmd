@@ -1,0 +1,19 @@
+sequenceDiagram
+  autonumber
+  actor C as Cashier
+  participant UI as POS screen
+  participant Core as pos-core
+  participant L as SQLite
+  participant HW as Printer/Drawer
+  participant S as Sync engine
+  participant API as Server
+  C->>UI: Scan items, press Pay, enter tenders
+  UI->>Core: calculateTotals(lines, rate, rounding)
+  Core-->>UI: totals USD / LBP, change
+  C->>UI: Confirm
+  UI->>L: BEGIN · insert sale, lines, payments<br/>update local stock · next invoice no<br/>insert outbox(Sale) · COMMIT
+  UI->>HW: print receipt, kick drawer
+  S->>L: read outbox (batch ≤ 50)
+  S->>API: POST /sync/push
+  API-->>S: results [APPLIED | DUPLICATE]
+  S->>L: mark outbox items done

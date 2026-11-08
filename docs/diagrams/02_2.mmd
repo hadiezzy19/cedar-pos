@@ -1,0 +1,25 @@
+flowchart TB
+  subgraph Clients
+    DUI["Desktop UI<br/>FXML views + ViewModels"]
+    MUI["Mobile UI<br/>Flutter widgets + Riverpod"]
+  end
+  subgraph ClientCore["Client core (per app)"]
+    LREPO["Local repositories<br/>(SQLite)"]
+    SYNC["Sync engine<br/>outbox · pull · retry"]
+    HTTP["API client"]
+    HWL["Hardware layer<br/>(desktop only)"]
+  end
+  subgraph ServerApp["Spring Boot"]
+    CTRL["REST controllers<br/>(/api/v1/...)"]
+    SEC["Security<br/>JWT · tenant context · permissions"]
+    APP["Application services<br/>(use cases, transactions)"]
+    DOM["Domain model + pos-core rules"]
+    INFRA["Repositories (JPA / JDBC)<br/>change_log writer · audit writer"]
+  end
+  DB[("PostgreSQL")]
+  DUI --> LREPO
+  DUI --> HWL
+  MUI --> LREPO
+  LREPO --> SYNC --> HTTP
+  HTTP --> CTRL --> SEC --> APP --> DOM
+  APP --> INFRA --> DB

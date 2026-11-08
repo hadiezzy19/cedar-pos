@@ -1,0 +1,19 @@
+flowchart TD
+  START(["App start"]) --> ACT{"Device<br/>activated?"}
+  ACT -- no --> A1["Activation<br/>(server URL + code)"] --> BOOT["First sync<br/>(progress)"] --> LOGIN
+  ACT -- yes --> LOGIN["Login<br/>user tiles + PIN"]
+  LOGIN --> SES{"Cash session<br/>open?"}
+  SES -- no, cashier --> OPEN["Open session<br/>floats USD / LBP"] --> POS
+  SES -- yes --> POS["REGISTER<br/>Sale screen"]
+  LOGIN -- back-office user --> BO["BACK OFFICE<br/>Dashboard"]
+  POS --> PAY["Payment dialog"] --> REC["Receipt / done"] --> POS
+  POS --> HOLD["Held sales"]
+  POS --> RET["Return / refund"]
+  POS --> CUST["Customer picker"]
+  POS --> CASHM["Pay-in / Pay-out"]
+  POS --> XREP["X-report"]
+  POS --> CLOSE["Close session<br/>blind count → Z"]
+  POS --> APPR["Approval dialog<br/>PIN or phone"]
+  POS --> SYNC["Sync Center"]
+  POS <--> |F10| BO
+  BO --> SALES["Sales"] & CAT["Catalog"] & INV["Inventory"] & PUR["Purchasing"] & CUS["Customers"] & CASH["Cash"] & EXP["Expenses"] & REP["Reports"] & ADM["Administration"]

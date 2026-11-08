@@ -1,0 +1,11 @@
+flowchart LR
+  SPLASH(["Splash"]) --> SETUP{"Server URL<br/>set?"}
+  SETUP -- no --> S1["Connect to server<br/>(URL / QR)"] --> LOGIN
+  SETUP -- yes --> LOGIN["Login"]
+  LOGIN --> ACTV{"Device<br/>activated?"}
+  ACTV -- no --> S2["Activate<br/>device"] --> SYNC0["First sync"] --> ROLE
+  ACTV -- yes --> ROLE{"Role"}
+  ROLE --> MGR["Manager shell"]
+  ROLE --> STK["Stock keeper shell"]
+  ROLE --> ACC["Accountant shell"]
+  ROLE -- Cashier --> DENY["Not allowed<br/>message"]

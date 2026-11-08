@@ -1,0 +1,72 @@
+erDiagram
+  expense_categories ||--o{ expenses : classifies
+  branches ||--o{ expenses : incurs
+  cash_sessions |o--o{ expenses : "paid from"
+  expenses |o--o| cash_movements : "creates pay-out"
+  devices ||--o{ approval_requests : raises
+  users ||--o{ approval_requests : "requests / decides"
+  users ||--o{ notifications : receives
+  devices ||--o{ processed_operations : pushes
+  devices ||--|| device_sync_state : tracks
+  processed_operations |o--o{ sync_issues : causes
+  businesses ||--o{ change_log : feeds
+  businesses ||--o{ audit_logs : records
+
+  expenses {
+    uuid id PK
+    uuid category_id FK
+    uuid branch_id FK
+    char currency FK
+    decimal amount
+    decimal amount_usd
+    bool paid_from_drawer
+  }
+  approval_requests {
+    uuid id PK
+    string request_type
+    string status
+    string channel
+    uuid requested_by FK
+    uuid decided_by FK
+    datetime expires_at
+  }
+  notifications {
+    uuid id PK
+    uuid user_id FK
+    string notif_type
+    datetime read_at
+  }
+  processed_operations {
+    uuid operation_id PK
+    uuid device_id FK
+    string entity_type
+    string result
+  }
+  change_log {
+    bigint seq PK
+    uuid business_id FK
+    uuid branch_id FK
+    string entity_type
+    string entity_id
+    string operation
+  }
+  device_sync_state {
+    uuid device_id PK
+    bigint last_pulled_seq
+    int clock_skew_seconds
+  }
+  sync_issues {
+    uuid id PK
+    uuid operation_id FK
+    string issue_type
+    string status
+  }
+  audit_logs {
+    bigint id PK
+    uuid user_id FK
+    string action
+    string entity_type
+    string entity_id
+    datetime occurred_at
+    string entry_hash
+  }

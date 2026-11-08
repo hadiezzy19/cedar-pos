@@ -1,0 +1,20 @@
+flowchart LR
+  subgraph Store["Branch"]
+    T1["Desktop POS (JavaFX)\nSQLite + outbox"]
+    T2["Desktop POS #2"]
+    HW["Scanner • Printer • Drawer • Scale"]
+    T1 --- HW
+  end
+  M["Flutter app\n(managers, stock counters)"]
+  subgraph Cloud["Cloud (modular monolith)"]
+    API["Spring Boot API\nAuth • Catalog • Inventory • Sales\nPurchasing • Sync • Reports • Audit"]
+    DB[("Main DB\nSQL Server or PostgreSQL")]
+    Q["Background jobs\n(reports, notifications)"]
+    API --- DB
+    API --- Q
+  end
+  FCM["Push (FCM/APNs)"]
+  T1 <-->|"HTTPS sync"| API
+  T2 <-->|"HTTPS sync"| API
+  M <-->|"HTTPS + live updates"| API
+  Q --> FCM --> M

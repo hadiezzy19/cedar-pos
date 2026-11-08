@@ -1,0 +1,13 @@
+stateDiagram-v2
+  [*] --> Unactivated
+  Unactivated --> Bootstrapping: activation code accepted
+  Bootstrapping --> Online: full pull done
+  Online --> Offline: health check fails ×2 / request timeout
+  Offline --> Reconnecting: health check OK
+  Reconnecting --> Online: outbox drained & pull done
+  Reconnecting --> Offline: failure
+  Online --> Online: push/pull every 30 s
+  Offline --> Restricted: offline > 72 h
+  Restricted --> Reconnecting: connection back
+  Online --> Deactivated: server returns DEVICE_REVOKED
+  Deactivated --> [*]

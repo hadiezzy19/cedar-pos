@@ -1,0 +1,109 @@
+erDiagram
+  cash_registers ||--o{ cash_sessions : "opened on"
+  cash_sessions ||--o{ sales : records
+  cash_sessions ||--o{ returns : records
+  cash_sessions ||--o{ cash_movements : records
+  cash_sessions |o--o{ customer_payments : records
+  sales ||--|{ sale_lines : contains
+  sales ||--|{ sale_payments : "paid by"
+  sales |o--o{ returns : "returned via"
+  returns ||--|{ return_lines : contains
+  returns ||--|{ return_refunds : "refunded by"
+  sale_lines |o--o{ return_lines : "returned as"
+  customers |o--o{ sales : buys
+  customers ||--o{ customer_ledger_entries : owes
+  customers ||--o{ customer_payments : pays
+  users ||--o{ sales : "cashier of"
+  approval_requests |o--o{ sales : authorizes
+  product_variants ||--o{ sale_lines : sold
+
+  cash_sessions {
+    uuid id PK
+    uuid cash_register_id FK
+    int session_no
+    string status
+    decimal opening_float_usd
+    decimal opening_float_lbp
+    decimal counted_usd
+    decimal counted_lbp
+    decimal difference_usd
+    decimal difference_lbp
+  }
+  cash_movements {
+    uuid id PK
+    uuid cash_session_id FK
+    string movement_type
+    char currency FK
+    decimal amount
+  }
+  sales {
+    uuid id PK
+    uuid cash_session_id FK
+    uuid customer_id FK
+    uuid cashier_id FK
+    string invoice_no UK
+    string status
+    decimal exchange_rate
+    decimal total_usd
+    decimal total_lbp
+    datetime occurred_at
+  }
+  sale_lines {
+    uuid id PK
+    uuid sale_id FK
+    uuid variant_id FK
+    decimal quantity
+    decimal unit_price
+    char price_currency FK
+    decimal tax_usd
+    decimal line_total_usd
+    decimal unit_cost_usd
+    decimal qty_returned
+  }
+  sale_payments {
+    uuid id PK
+    uuid sale_id FK
+    string method
+    bool is_change
+    char currency FK
+    decimal amount
+    decimal amount_usd
+  }
+  returns {
+    uuid id PK
+    uuid original_sale_id FK
+    string return_no UK
+    decimal total_refund_usd
+  }
+  return_lines {
+    uuid id PK
+    uuid return_id FK
+    uuid original_sale_line_id FK
+    decimal quantity
+    bool restock
+  }
+  return_refunds {
+    uuid id PK
+    uuid return_id FK
+    string method
+    char currency FK
+    decimal amount
+  }
+  customers {
+    uuid id PK
+    string name
+    string phone UK
+    decimal credit_limit_usd
+  }
+  customer_ledger_entries {
+    uuid id PK
+    uuid customer_id FK
+    string entry_type
+    decimal amount_usd
+  }
+  customer_payments {
+    uuid id PK
+    uuid customer_id FK
+    char currency FK
+    decimal amount
+  }

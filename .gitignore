@@ -1,0 +1,23 @@
+# Java / Maven
+target/
+*.class
+*.log
+# NetBeans / IDEs
+nbproject/private/
+nbactions.xml
+nb-configuration.xml
+.idea/
+*.iml
+.vscode/
+# Flutter
+mobile/**/build/
+mobile/**/.dart_tool/
+mobile/**/.flutter-plugins*
+# Local data & secrets
+*.db
+*.db-journal
+.env
+application-local.yml
+# OS
+.DS_Store
+Thumbs.db

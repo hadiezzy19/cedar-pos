@@ -1,0 +1,18 @@
+gantt
+  title Cedar POS — 8-week plan
+  dateFormat YYYY-MM-DD
+  excludes weekends
+  axisFormat %d %b
+  section Foundation
+  P0 Setup & skeletons            :p0, 2026-11-16, 3d
+  P1 Backend core + catalog API   :p1, after p0, 6d
+  section Desktop
+  P2 Desktop shell + local DB + pull :p2, after p1, 4d
+  P3 Register, selling, offline, push :crit, p3, after p2, 8d
+  section Operations
+  P4 Returns, customers, inventory, purchasing, expenses :p4, after p3, 5d
+  section Mobile
+  P5 Mobile app                   :p5, after p4, 8d
+  section Finish
+  P6 Reports, hardening, demo     :p6, after p5, 5d
+  Buffer                          :buf, after p6, 1d

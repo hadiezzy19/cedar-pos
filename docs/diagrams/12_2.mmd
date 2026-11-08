@@ -1,0 +1,9 @@
+flowchart TB
+  P0["P0 Setup"] --> P1["P1 Backend core<br/>+ catalog"]
+  P1 --> P2["P2 Desktop shell<br/>+ pull sync"]
+  P2 --> P3["P3 Register<br/>+ push sync ★"]
+  P3 --> P4["P4 Returns, customers,<br/>inventory, purchasing"]
+  P3 --> P5["P5 Mobile"]
+  P4 --> P5
+  P4 --> P6["P6 Reports, hardening,<br/>demo"]
+  P5 --> P6

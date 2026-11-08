@@ -1,0 +1,26 @@
+flowchart LR
+  subgraph Branch["Branch B01"]
+    direction TB
+    D1["Desktop POS T01<br/>JavaFX · SQLite"]
+    D2["Desktop POS T02<br/>JavaFX · SQLite"]
+    HW["Printer · Drawer · Scanner"]
+    D1 --- HW
+  end
+  subgraph Phones["Mobile"]
+    M1["Owner / Manager<br/>Flutter · SQLite"]
+    M2["Stock keeper<br/>Flutter · SQLite"]
+  end
+  subgraph Server["Server (laptop / VM)"]
+    direction TB
+    API["Spring Boot API<br/>(modular monolith)"]
+    DB[("PostgreSQL<br/>cedarpos DB")]
+    BK["Backup job<br/>pg_dump + WAL archive"]
+    API --- DB
+    BK -.-> DB
+  end
+  FCM["Firebase Cloud<br/>Messaging"]
+  D1 <-->|"HTTPS · REST + sync"| API
+  D2 <-->|"HTTPS · REST + sync"| API
+  M1 <-->|"HTTPS · REST + sync"| API
+  M2 <-->|"HTTPS · REST + sync"| API
+  API -->|"push"| FCM -.-> M1

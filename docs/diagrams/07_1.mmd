@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant D as Device
+  participant A as API
+  Note over D,A: One-time activation
+  D->>A: POST /devices/activate {activationCode, deviceInfo}
+  A-->>D: {deviceId, deviceSecret, branch, business}
+  Note over D,A: Login (password or PIN)
+  D->>A: POST /auth/login {username, password} or /auth/pin-login {userId, pin}
+  A-->>D: {accessToken (15 min), refreshToken (30 d), user, permissions}
+  D->>A: GET /... Authorization: Bearer access
+  A-->>D: 401 TOKEN_EXPIRED
+  D->>A: POST /auth/refresh {refreshToken}
+  A-->>D: new pair (refresh token rotated)

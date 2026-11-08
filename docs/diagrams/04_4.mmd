@@ -1,0 +1,98 @@
+erDiagram
+  branches ||--o{ stock_levels : holds
+  product_variants ||--o{ stock_levels : "stocked as"
+  product_variants ||--o{ stock_movements : moves
+  branches ||--o{ stock_movements : "happens in"
+  stock_adjustments ||--|{ stock_adjustment_lines : contains
+  stock_counts ||--|{ stock_count_lines : contains
+  stock_transfers ||--|{ stock_transfer_lines : contains
+  branches ||--o{ stock_transfers : "from / to"
+  suppliers ||--o{ purchases : supplies
+  purchases ||--|{ purchase_lines : contains
+  suppliers ||--o{ supplier_payments : "paid by"
+  purchases |o--o{ supplier_payments : settles
+  product_variants ||--o{ purchase_lines : bought
+
+  stock_levels {
+    uuid branch_id PK
+    uuid variant_id PK
+    decimal quantity_on_hand
+    decimal avg_cost_usd
+    decimal reorder_point
+  }
+  stock_movements {
+    uuid id PK
+    uuid branch_id FK
+    uuid variant_id FK
+    string movement_type
+    decimal quantity
+    decimal unit_cost_usd
+    string source_type
+    uuid source_id
+    datetime occurred_at
+  }
+  stock_adjustments {
+    uuid id PK
+    uuid branch_id FK
+    string reason
+    string status
+  }
+  stock_adjustment_lines {
+    uuid id PK
+    uuid adjustment_id FK
+    uuid variant_id FK
+    decimal quantity
+  }
+  stock_counts {
+    uuid id PK
+    uuid branch_id FK
+    string status
+  }
+  stock_count_lines {
+    uuid id PK
+    uuid count_id FK
+    uuid variant_id FK
+    decimal counted_qty
+  }
+  stock_transfers {
+    uuid id PK
+    uuid from_branch_id FK
+    uuid to_branch_id FK
+    string status
+  }
+  stock_transfer_lines {
+    uuid id PK
+    uuid transfer_id FK
+    decimal qty_sent
+    decimal qty_received
+  }
+  suppliers {
+    uuid id PK
+    string name
+    char default_currency FK
+  }
+  purchases {
+    uuid id PK
+    uuid supplier_id FK
+    uuid branch_id FK
+    string status
+    char currency FK
+    decimal exchange_rate
+    decimal total_usd
+  }
+  purchase_lines {
+    uuid id PK
+    uuid purchase_id FK
+    uuid variant_id FK
+    decimal qty_ordered
+    decimal qty_received
+    decimal unit_cost
+  }
+  supplier_payments {
+    uuid id PK
+    uuid supplier_id FK
+    uuid purchase_id FK
+    char currency FK
+    decimal amount
+    decimal amount_usd
+  }
